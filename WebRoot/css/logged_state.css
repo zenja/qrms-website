@@ -1,0 +1,66 @@
+#loggedState {
+	float: right;
+	width: 120px;
+	color: #6e6e6e;
+	text-align: right;
+	padding: 12px 0 0 0;
+	margin: 0;
+	font: normal 13px Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+}
+
+#loggedState a img {
+	border-width: 0;
+}
+
+#signin_form {
+	display: none;
+}
+
+#sign_in_img {
+	margin: 5px 0 0 0;
+}
+
+.signin_label {
+	display: block;
+	float: left;
+	width: 90px;
+	padding: 5px 0;
+	margin: 0;
+	font-family: tahoma, helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	color: #242484;
+	
+	vertical-align : center;
+}
+
+.signin_input {
+	width: 150px;	
+}
+
+#signin_submit {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	background: #39d url('../images/bg-btn-blue.png') repeat-x scroll 0 0;
+	border: 1px solid #39D;
+	color: #fff;
+	text-shadow: 0 -1px 0 #39d;
+	padding: 4px 10px 5px;
+	font-size: 11px;
+	margin: 0 5px 0 185px;
+	font-weight: bold;
+}
+
+#signin_submit::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+#signin_submit:hover,#signin_submit:focus {
+	background-position: 0 -5px;
+	cursor: pointer;
+}
+
+.user_profile {
+	margin-top: -7px;
+}

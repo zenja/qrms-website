@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 
+	bean的映射配置文件
+	有一个bean，就有一个bean映射文件
+	所有的bean映射文件都会写入spring配置文件中sessionFactory的mappingResources属性
+-->
+
+<hibernate-mapping>
+	<class name="com.qrms.bean.User" table="tbl_userinfo" lazy="false">
+	
+		<id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="loginEmail" type="java.lang.String">
+            <column name="loginEmail" not-null="true" />
+        </property>
+        
+        <property name="password" type="java.lang.String">
+            <column name="password" not-null="true" />
+        </property>
+        
+        <property name="name" type="java.lang.String">
+            <column name="name" not-null="true" />
+        </property>
+        
+        <property name="nation" type="java.lang.String">
+            <column name="nation" length="45" />
+        </property>
+        
+        <property name="province" type="java.lang.String">
+            <column name="province" length="45" />
+        </property>
+        
+        <property name="city" type="java.lang.String">
+            <column name="city" length="45" />
+        </property>
+        
+        <property name="photo" type="java.lang.String">
+            <column name="photo" length="128" />
+        </property>
+        
+	</class>
+</hibernate-mapping>

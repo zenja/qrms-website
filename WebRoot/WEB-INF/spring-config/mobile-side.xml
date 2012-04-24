@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!--used in QRBattle mode -->
+	<bean id="mobileLoginAction" class="com.qrms.action.mobile.MobileLoginAction"
+		scope="prototype">
+		<property name="uls" ref="userloginService">
+		</property>
+	</bean>
+	<bean id="getCityBroadcastListAction" class="com.qrms.action.mobile.GetCityBroadcastListAction"
+		scope="prototype">
+		<property name="getcbs" ref="getCityBroadcastService">
+		</property>
+	</bean>
+	<bean id="getMyTerritoryListAction" class="com.qrms.action.mobile.GetMyTerritoryListAction"
+		scope="prototype">
+		<property name="getmts" ref="getMyTerritoryService">
+		</property>
+	</bean>
+	<bean id="searchTerritoryListAction" class="com.qrms.action.mobile.SearchTerritoryAction"
+		scope="prototype">
+		<property name="getmts" ref="getMyTerritoryService">
+		</property>
+	</bean>
+	<bean id="getCityBattleEventListAction" class="com.qrms.action.mobile.GetCityBattleEventListAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService"></property>
+	</bean>
+	<bean id="rankAction" class="com.qrms.action.mobile.RankAction"
+		scope="prototype">
+		<property name="rs" ref="rankService"></property>
+	</bean>
+	<bean id="getMyNewsListAction" class="com.qrms.action.mobile.GetMyNewsListAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService">
+		</property>
+	</bean>
+	<bean id="getMyMsgListAction" class="com.qrms.action.mobile.GetMyMsgListAction"
+		scope="prototype">
+		<property name="getcbs" ref="getCityBroadcastService">
+		</property>
+	</bean>
+	<bean id="occupyAction" class="com.qrms.action.mobile.OccupyAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService"></property>
+		<property name="as" ref="achievementService"></property>
+	</bean>
+	<bean id="defendAction" class="com.qrms.action.mobile.DefendAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService"></property>
+		<property name="as" ref="achievementService"></property>
+	</bean>
+	<bean id="reinforceAction" class="com.qrms.action.mobile.ReinforceAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService"></property>
+	</bean>
+	<bean id="getCityTerritoryListAction" class="com.qrms.action.mobile.GetCityTerritoryListAction"
+		scope="prototype">
+		<property name="getmts" ref="getMyTerritoryService"></property>
+	</bean>
+	<bean id="getTerritoryInfoAction" class="com.qrms.action.mobile.GetTerritoryInfoAction"
+		scope="prototype">
+		<property name="getcbes" ref="getCityBattleEventService"></property>
+	</bean>
+	<bean id="sendBroadcastAction" class="com.qrms.action.mobile.SendBroadcastAction"
+		scope="prototype">
+		<property name="getcbs" ref="getCityBroadcastService">
+		</property>
+	</bean>
+	<bean id="getMsgBoxListAction" class="com.qrms.action.mobile.GetMsgBoxListAction"
+		scope="prototype">
+		<property name="msgBoxService" ref="msgBoxService">
+		</property>
+	</bean>
+	<bean id="reportErrorAction" class="com.qrms.action.mobile.ReportErrorAction"
+		scope="prototype">
+		<property name="errorReportService" ref="errorReportService">
+		</property>
+	</bean>
+	
+	<bean id="getAchievementAction" class="com.qrms.action.mobile.GetAchievementAction"
+		scope="prototype">
+		<property name="achievementService" ref="achievementService"></property>
+	</bean>
+	
+	<!-- Services -->
+	<bean id="getCityBattleEventService" class="com.qrms.service.impl.mobile.GetCityBattleEventService"
+		lazy-init="false">
+		<property name="battleEventDao" ref="battleEventDao"></property>
+		<property name="userDao" ref="userDao"></property>
+		<property name="strongholdDao" ref="strongholdsDao"></property>
+	</bean>
+	<bean id="getCityBroadcastService" class="com.qrms.service.impl.mobile.GetCityBroadcastService"
+		lazy-init="false">
+		<property name="cityBroadcastDao" ref="cityBroadcastDao">
+		</property>
+		<property name="userDao" ref="userDao">
+		</property>
+	</bean>
+	<bean id="getMyTerritoryService" class="com.qrms.service.impl.mobile.GetMyTerritoryService"
+		lazy-init="false">
+		<property name="strongholdsDao" ref="strongholdsDao"></property>
+	</bean>
+	<bean id="achievementService" class="com.qrms.service.impl.mobile.AchievementService"
+		lazy-init="false">
+		<property name="achievementDao" ref="achievementDao"></property>
+	</bean>
+	<bean id="rankService" class="com.qrms.service.impl.mobile.RankService"
+		lazy-init="false">
+		<property name="rankByExpDao" ref="rankByExpDao"></property>
+		<property name="rankBySetupNumDao" ref="rankBySetupNumDao"></property>
+		<property name="rankByOccupyingNumDao" ref="rankByOccupyingNumDao"></property>
+	</bean>
+	<bean id="msgBoxService" class="com.qrms.service.impl.mobile.MsgBoxService"
+		lazy-init="false">
+		<property name="msgBoxDao" ref="msgBoxDao"></property>
+	</bean>
+	<bean id="errorReportService" class="com.qrms.service.impl.mobile.ErrorReportService"
+		lazy-init="false">
+		<property name="errorReportDao" ref="errorReportDao"></property>
+	</bean>
+	
+	
+	<!-- Dao -->
+	<bean id="battleEventDao" class="com.qrms.dao.impl.BattleEventDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="strongholdsDao" class="com.qrms.dao.impl.StrongholdsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="cityBroadcastDao" class="com.qrms.dao.impl.CityBroadcastDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="achievementDao" class="com.qrms.dao.impl.AchievementDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="rankByExpDao" class="com.qrms.dao.impl.RankByExpDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="rankByOccupyingNumDao" class="com.qrms.dao.impl.RankByOccupyingNumDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="rankBySetupNumDao" class="com.qrms.dao.impl.RankBySetupNumDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="msgBoxDao" class="com.qrms.dao.impl.MsgBoxDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="errorReportDao" class="com.qrms.dao.impl.ErrorReportDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- END -->
+
+</beans>

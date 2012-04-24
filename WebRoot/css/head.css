@@ -1,0 +1,97 @@
+/********** header **********/
+.header {
+	background-repeat: repeat-x;
+	background-color: #000000;
+	background-position: top;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.block_header {
+	margin: 0 auto;
+	width: 960px;
+	height: 55px;
+	padding: 0;
+	border: none;
+	position: relative;
+}
+
+/* logo */
+.logo {
+	float: left;
+	padding: 0;
+	margin: 0;
+	margin-top: 10px;
+	width: 200px;
+}
+
+/* menu */
+.menu {
+	float: right;
+	padding: 8px 0 0 0;
+	margin: 0;
+}
+
+.menu ul {
+	text-align: right;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	border: 0;
+	float: right;
+}
+
+.menu ul li {
+	float: left;
+	margin: 0;
+	padding: 0 5px;
+	border: 0;
+}
+
+.menu ul li a {
+	float: left;
+	margin: 0;
+	padding: 13px 0;
+	color: #a1a1a1;
+	font: normal 12px Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif
+		;
+	text-decoration: none;
+}
+
+.menu ul li a span {
+	padding: 13px;
+	background: none;
+}
+
+.menu ul li a:hover {
+	color: #fff;
+	background: url(../images/r_menu.gif) no-repeat right;
+}
+
+.menu ul li a:hover span {
+	color: #fff;
+	background: url(../images/l_menu.gif) no-repeat left;
+}
+
+.menu ul li a.active {
+	color: #fff;
+	background: url(../images/r_menu.gif) no-repeat right;
+}
+
+.menu ul li a.active span {
+	color: #fff;
+	background: url(../images/l_menu.gif) no-repeat left;
+}
+
+
+/***********facebook-twitter***********/
+.facebook-twitter {
+	position: relative;
+	float: right;
+	padding: 13px 0 0 0;
+	margin-left: 30px;
+}
+
+#twitter {
+	margin-left:4px;	
+}

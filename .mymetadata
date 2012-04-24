@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="my_qrms"
+  id="myeclipse.1279798252838"
+  context-root="/my_qrms"
+  j2ee-spec="5.0"
+  archive="my_qrms.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

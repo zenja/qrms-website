@@ -1,0 +1,93 @@
+.game_scenario_homepage_top_display {
+	height: 400px;
+	margin-bottom: 80px;
+}
+
+.game_scenario_homepage_top_display img {
+	margin: 20px 30px 30px 70px;
+	float: left;
+}
+
+.game_scenario_homepage_top_display h1 {
+	font-family: Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	color: #222;
+	width: 400px;
+	margin-top: 100px;
+	float: left;
+	
+	text-shadow: #ddd 1px 1px 1px;
+}
+
+.game_scenario_homepage_top_display p {
+	width: 400px;
+	font-family: Verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	float: left;
+	color: dimGray;
+}
+
+.game_scenario_homepage_column_main {
+	margin-top:30px;
+	margin-bottom: 40px;
+	padding: 0 10px 5px 20px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.game_scenario_homepage_column {
+	margin-top:30px;
+	margin-bottom: 40px;
+	padding: 0 10px 5px 20px;
+	border-bottom: 1px dotted #ccc;
+}
+
+.game_scenario_homepage_column_main p span {
+	color: #444;
+	font-family: 'Irish Growler', Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	
+	text-shadow: #ddd 1px 1px 2px;
+}
+
+.game_scenario_homepage_column p span {
+	color: #555;
+	font-family: 'Irish Growler', Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	font-size: 26px;
+	font-weight: bold;
+	
+	text-shadow: #ddd 1px 1px 2px;
+}
+
+/******************************************/
+#column_div_1 {
+	border-right: 18px solid #4556f7;
+}
+
+#column_div_2 {
+	border-left: 18px solid #0ed40e;
+}
+
+#column_div_3 {
+	border-right: 18px solid #f5f332;
+}
+
+#column_div_4 {
+	border-left: 18px solid #df2a11;
+}
+
+#column_div_5 {
+	border-right: 18px solid #4556f7;
+}
+
+#column_div_6 {
+	border-left: 18px solid #0ed40e;
+}
+
+#column_div_7 {
+	border-right: 18px solid #f5f332;
+}
+
+#column_div_8 {
+	border-left: 18px solid #df2a11;
+}

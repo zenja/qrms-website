@@ -1,0 +1,25 @@
+.gameLog_item_title {
+	font-weight:700;
+}
+
+#gameLog_username {
+	margin-left:10px;
+	margin-right:10px;
+	color:#0066CC;
+}
+
+#gameLog_time {
+	color:#666666;
+	margin-left:13px;
+}
+
+#gameLog_content {
+	font-size:120%;
+	margin:20px;
+	margin-top:50px;
+	margin-bottom:50px;
+}
+
+#gameLog_content p{
+	font-family:"Times New Roman", Times, serif;
+}

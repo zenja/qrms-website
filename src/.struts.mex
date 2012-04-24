@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="user" location="0,0" size="0,0">
+    <action name="showUserProfile" location="0,0" size="0,0">
+      <result name="success">
+        <resourceEdge source="success" routing="0" target="user-profile.jsp" />
+      </result>
+      <result name="noUserId" />
+    </action>
+    <action name="launchPuzzleSolvingGame" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="noGameLauncher" />
+    </action>
+    <action name="createLog" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="gameNotExist" />
+      <result name="logCreaterNotExist" />
+    </action>
+    <action name="editUserProfile" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="launchInspiringGame" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="noGameLauncher" />
+      <result name="input" />
+    </action>
+    <action name="showInspiringGameDetail" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="showPuzzleSolvingGameDetail" location="0,0" size="0,0">
+      <result name="showDetail" />
+      <result name="input" />
+    </action>
+    <action name="userLogout" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="viewStaredGames" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="sendInternalMessage" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="error" />
+    </action>
+    <action name="viewAllInternalMessages" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="viewSingleInternalMessage" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="showModifyInspiringGamePage" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="modifyInspiringGame" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="error" />
+    </action>
+    <action name="showModifyPuzzleSolvingGamePage" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="modifyPuzzleSolvingGame" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="error" />
+    </action>
+    <action name="showMyProfileMainPage" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="viewGameComment" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="recountInspiringGameQRCode" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="recountPuzzleSolvingGameQRCode" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+  </package>
+  <package name="admin" location="0,0" size="0,0">
+    <action name="publishNews" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="publishEvent" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="adminLogout" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+  </package>
+  <package name="visitor" location="0,0" size="0,0">
+    <action name="userRegister" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="userLogin" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="sendMail" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="uservalidate" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="byCity" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="byProv" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="byCou" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="byLatLong" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="byOriginLatLong" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="viewLog" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="showQRContent" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="seekInspiringGameByCity" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="seekInspiringGameByProvince" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="seekInspiringGameByNation" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="seekInspiringGameByLatLong" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="seekInspiringGameByOriginLatLong" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="viewLaunchedGames" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="adminLogin" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="adminLogin" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="error" />
+    </action>
+    <action name="viewSingleNews" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="viewSingleEvent" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+    </action>
+    <action name="makeGameCommentForPuzzleSolving" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="error" />
+    </action>
+    <action name="makeGameCommentForInspiringMark" location="0,0" size="0,0">
+      <result name="success" />
+      <result name="input" />
+      <result name="error" />
+    </action>
+  </package>
+  <package name="json" location="0,0" size="0,0">
+    <action name="retrieveLatestNews" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="retrieveLatestEvents" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="starGame" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+    <action name="loginEmailExists" location="0,0" size="0,0">
+      <result name="success" />
+    </action>
+  </package>
+  <webResource name="ShowUserProfile.jsp" path="/ShowUserProfile.jsp" location="0,0" size="0,0" />
+  <webResource name="user-profile.jsp" path="/user/user-profile.jsp" location="0,0" size="0,0" />
+</Struts2Diagram>
+

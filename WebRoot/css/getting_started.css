@@ -1,0 +1,64 @@
+.div_title p {
+	font-size: 18px;
+	font-weight: bold;
+	font-family: Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	color: #0070bb;
+	margin-top: 20px;
+}
+
+.dotline {
+	border-top: 1px solid #D6D6D6;
+	height: 1px;
+	margin-bottom: 10px;
+	margin-top: 0.5em;
+}
+
+.go_top {
+	margin-bottom: -10px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+#catalog {
+	display: block;
+	margin-top: 50px;
+}
+
+#inspiring_mark_main {
+	padding-right: 190px;
+	background: url(../images/inspiring.png) top right no-repeat;
+}
+
+#puzzle_solving_main {
+	padding-right: 190px;
+	background: url(../images/puzzle.png) top right no-repeat;
+}
+
+#conquest_and_defence_main {
+	padding-right: 190px;
+	background: url(../images/defend.png) top right no-repeat;
+}
+
+em {
+	font-style: oblique;
+}
+
+/************Sign up button************/
+#signup_button_p {
+	align:center;
+	margin: 0 auto;
+	padding: 0; 
+	background : url(../images/signup_button.png) 0 -67px;
+	height: 67px;
+	width: 582px;
+	display: block;
+	background-position: 0 -67px;
+	background: url(../images/signup_button.png) 0 -67px;
+}
+
+#signup_button_a {
+	background: url(../images/signup_button.png) 0 0px;
+	height: 67px;
+	width: 582px;
+	display: block;
+}

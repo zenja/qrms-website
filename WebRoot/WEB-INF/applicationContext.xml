@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/qrms"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+
+	<!-- 配置sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 将dataSource注入到sessionFactory中 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 部署时设为false可提高性能 -->
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<!-- 映射文件。如果有多个持久化类，则将有多个映射文件 -->
+				<value>com/qrms/bean/User.hbm.xml</value>
+				<value>com/qrms/bean/UserNotValidatedInfo.hbm.xml</value>
+				<value>com/qrms/bean/PuzzleSolvingGameInfo.hbm.xml</value>
+				<value>com/qrms/bean/InspiringGameInfo.hbm.xml</value>
+				<value>com/qrms/bean/QRContent.hbm.xml</value>
+				<value>com/qrms/bean/Admin.hbm.xml</value>
+				<value>com/qrms/bean/Event.hbm.xml</value>
+				<value>com/qrms/bean/News.hbm.xml</value>
+				<value>com/qrms/bean/Achievement.hbm.xml</value>
+				<value>com/qrms/bean/BattleEvent.hbm.xml</value>
+				<value>com/qrms/bean/CityBroadcast.hbm.xml</value>
+				<value>com/qrms/bean/ErrorReport.hbm.xml</value>
+				<value>com/qrms/bean/MsgBox.hbm.xml</value>
+				<value>com/qrms/bean/Strongholds.hbm.xml</value>
+				<value>com/qrms/bean/StaredGame.hbm.xml</value>
+				<value>com/qrms/bean/InternalMessage.hbm.xml</value>
+				<value>com/qrms/bean/GameComment.hbm.xml</value>
+				<value>com/qrms/bean/RankByExp.hbm.xml</value>
+				<value>com/qrms/bean/RankByOccupyingNum.hbm.xml</value>
+				<value>com/qrms/bean/RankBySetupNum.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!--
+		Transaction manager for a single Hibernate SessionFactory (alternative
+		to JTA);
+	-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<import resource="spring-config/mobile-side.xml" />
+
+	<bean id="userDao" class="com.qrms.dao.impl.UserDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userService" class="com.qrms.service.impl.UserServiceImpl"
+		lazy-init="false">
+		<property name="userDao" ref="userDao">
+		</property>
+	</bean>
+
+	<bean id="userRegisterAction" class="com.qrms.action.user.UserRegisterAction"
+		scope="prototype">
+		<property name="userService" ref="userService">
+		</property>
+		<property name="nvuserService" ref="nvuserService">
+		</property>
+	</bean>
+
+	<bean id="userloginService" class="com.qrms.service.impl.LoginServiceImpl"
+		lazy-init="false">
+		<property name="userDao" ref="userDao">
+		</property>
+	</bean>
+
+	<bean id="userLoginAction" class="com.qrms.action.user.UserLoginAction"
+		scope="prototype">
+		<property name="uls" ref="userloginService">
+		</property>
+	</bean>
+
+	<bean id="userLogoutAction" class="com.qrms.action.user.UserLogoutAction"
+		scope="prototype">
+	</bean>
+
+	<bean id="sendMailAction" class="com.qrms.action.user.SendMailAction"
+		scope="prototype">
+		<property name="uvs" ref="userValidateService" />
+	</bean>
+
+	<bean id="userNotValidatedInfoDAO" class="com.qrms.dao.impl.UserNotValidatedInfoDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="nvuserService" class="com.qrms.service.impl.SaveNotValidatedUserServiceImpl"
+		scope="prototype">
+		<property name="nvUserDAO" ref="userNotValidatedInfoDAO">
+		</property>
+	</bean>
+
+	<bean id="userValidateService" class="com.qrms.service.impl.UserValidateServiceImpl"
+		scope="prototype">
+		<property name="nvUserDAO" ref="userNotValidatedInfoDAO" />
+		<property name="userDAO" ref="userDao" />
+	</bean>
+
+	<bean id="userValidateAction" class="com.qrms.action.user.UserValidateAction"
+		scope="prototype">
+		<property name="uvs" ref="userValidateService" />
+	</bean>
+
+	<bean id="puzzleSolvingGameInfoDAO" class="com.qrms.dao.impl.PuzzleSolvingGameInfoDAOImpl"
+		scope="prototype">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="launchPuzzleSolvingGameService"
+		class="com.qrms.service.impl.LaunchPuzzleSolvingGameServiceImpl"
+		scope="prototype">
+		<property name="puzzleSolvingGameInfoDAO" ref="puzzleSolvingGameInfoDAO" />
+	</bean>
+
+	<bean id="launchPuzzleSolvingGameAction"
+		class="com.qrms.action.puzzlesolvinggame.LaunchPuzzleSolvingGameAction"
+		scope="prototype">
+		<property name="launchPuzzleSolvingGameService" ref="launchPuzzleSolvingGameService" />
+		<property name="userService" ref="userService" />
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+
+
+	<bean id="showPuzzleSolvingGameDetailService"
+		class="com.qrms.service.impl.ShowPuzzleSolvingGameDetailServiceImpl"
+		scope="prototype">
+		<property name="puzzleSolvingGameInfoDAO" ref="puzzleSolvingGameInfoDAO" />
+	</bean>
+
+	<bean id="showPuzzleSolvingGameDetailAction"
+		class="com.qrms.action.puzzlesolvinggame.ShowPuzzleSolvingGameDetailAction"
+		scope="prototype">
+		<property name="showPuzzleSolvingGameDetailService" ref="showPuzzleSolvingGameDetailService"></property>
+		<property name="gameCommentService" ref="gameCommentService"></property>
+		<property name="staredGameService" ref="staredGameService"></property>
+	</bean>
+	<bean id="seekGameService" class="com.qrms.service.impl.SeekGameImpl"
+		scope="prototype" lazy-init="false">
+		<property name="gameInfoDAO" ref="puzzleSolvingGameInfoDAO" />
+	</bean>
+
+	<bean id="seekGameAction" class="com.qrms.action.puzzlesolvinggame.SeekGameAction"
+		scope="prototype">
+		<property name="seekGameService" ref="seekGameService" />
+	</bean>
+
+	<bean id="editUserProfileAction" class="com.qrms.action.user.EditUserProfileAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean id="showUserProfileAction" class="com.qrms.action.user.ShowUserProfileAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="puzzleSolvingGameService" ref="showPuzzleSolvingGameDetailService" />
+	</bean>
+
+
+	<bean id="QRContentDAO" class="com.qrms.dao.impl.QRContentDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="inspiringGameInfoDAO" class="com.qrms.dao.impl.InspiringGameInfoDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="inspiringGameService" class="com.qrms.service.impl.InspiringGameServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="inspiringGameInfoDAO" ref="inspiringGameInfoDAO" />
+	</bean>
+
+	<bean id="QRContentService" class="com.qrms.service.impl.QRContentServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="qrContentDAO" ref="QRContentDAO" />
+	</bean>
+
+	<bean id="launchInspiringGameAction" class="com.qrms.action.inspiringgame.LaunchInspiringGameAction"
+		scope="prototype">
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="userService" ref="userService" />
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+
+	<bean id="showQRContentAction" class="com.qrms.action.inspiringgame.ShowQRContentAction"
+		scope="prototype">
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+
+	<bean id="seekInspiringGameAction" class="com.qrms.action.inspiringgame.SeekInspiringGameAction"
+		scope="prototype">
+		<property name="inspiringGameService" ref="inspiringGameService" />
+	</bean>
+
+	<bean id="showInspiringGameDetailAction"
+		class="com.qrms.action.inspiringgame.ShowInspiringGameDetailAction"
+		scope="prototype">
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="staredGameService" ref="staredGameService"></property>
+		<property name="gameCommentService" ref="gameCommentService" />
+	</bean>
+
+	<bean id="viewLaunchedGamesAction" class="com.qrms.action.general.ViewLaunchedGamesAction"
+		scope="prototype">
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="puzzleSolvingGameService" ref="showPuzzleSolvingGameDetailService" />
+	</bean>
+
+	<bean id="AdminDAO" class="com.qrms.dao.impl.AdminDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="NewsDAO" class="com.qrms.dao.impl.NewsDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="EventDAO" class="com.qrms.dao.impl.EventDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="adminService" class="com.qrms.service.impl.AdminServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="adminDAO" ref="AdminDAO" />
+	</bean>
+
+	<bean id="newsService" class="com.qrms.service.impl.NewsServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="newsDAO" ref="NewsDAO" />
+	</bean>
+
+	<bean id="eventService" class="com.qrms.service.impl.EventServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="eventDAO" ref="EventDAO" />
+	</bean>
+
+	<bean id="publishNewsAction" class="com.qrms.action.news.PublishNewsAction"
+		scope="prototype">
+		<property name="newsService" ref="newsService" />
+	</bean>
+
+	<bean id="publishEventAction" class="com.qrms.action.event.PublishEventAction"
+		scope="prototype">
+		<property name="eventService" ref="eventService" />
+	</bean>
+
+	<bean id="adminLoginAndLogoutAction" class="com.qrms.action.admin.AdminLoginAndLogoutAction"
+		scope="prototype">
+		<property name="adminService" ref="adminService" />
+	</bean>
+	
+	<bean id="retrieveNewsAction" class="com.qrms.action.news.RetrieveNewsAction"
+		scope="prototype">
+		<property name="newsService" ref="newsService" />
+	</bean>
+	
+	<bean id="retrieveEventAction" class="com.qrms.action.event.RetrieveEventAction"
+		scope="prototype">
+		<property name="eventService" ref="eventService" />
+	</bean>
+
+	<bean id="staredGameDAO" class="com.qrms.dao.impl.StaredGameDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="staredGameService" class="com.qrms.service.impl.StaredGameServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="staredGameDAO" ref="staredGameDAO" />
+	</bean>
+	
+	<bean id="starGameAction" class="com.qrms.action.staredgame.StarGameAction"
+		scope="prototype">
+		<property name="staredGameService" ref="staredGameService" />
+	</bean>
+	
+	
+	<bean id="viewStaredGameAction" class="com.qrms.action.staredgame.ViewStaredGameAction"
+		scope="prototype">
+		<property name="staredGameService" ref="staredGameService" />
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="puzzleSolvingGameService" ref="showPuzzleSolvingGameDetailService" />
+	</bean>
+	
+	
+	<bean id="internalMessageDAO" class="com.qrms.dao.impl.InternalMessageDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="internalMessageService" class="com.qrms.service.impl.InternalMessageServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="internalMessageDAO" ref="internalMessageDAO" />
+	</bean>
+	
+	<bean id="sendInternalMessageAction" class="com.qrms.action.internalmessage.SendInternalMessageAction"
+		scope="prototype">
+		<property name="internalMessageService" ref="internalMessageService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="viewInternalMessageAction" class="com.qrms.action.internalmessage.ViewInternalMessageAction"
+		scope="prototype">
+		<property name="internalMessageService" ref="internalMessageService" />
+	</bean>
+	
+	<bean id="modifyInspiringGameAction" class="com.qrms.action.inspiringgame.ModifyInspiringGameAction"
+		scope="prototype">
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+	
+	<bean id="modifyPuzzleSolvingGameAction" class="com.qrms.action.puzzlesolvinggame.ModifyPuzzleSolvingGameAction"
+		scope="prototype">
+		<property name="launchPuzzleSolvingGameService" ref="launchPuzzleSolvingGameService" />
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+	
+	<bean id="showMyProfileMainPageAction" class="com.qrms.action.user.ShowMyProfileMainPageAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="inspiringGameService" ref="inspiringGameService" />
+		<property name="puzzleSolvingGameService" ref="showPuzzleSolvingGameDetailService" />
+	</bean>
+	
+	<bean id="gameCommentDAO" class="com.qrms.dao.impl.GameCommentDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="gameCommentService" class="com.qrms.service.impl.GameCommentServiceImpl"
+		scope="prototype" lazy-init="false">
+		<property name="gameCommentDAO" ref="gameCommentDAO" />
+	</bean>
+	
+	<bean id="viewGameCommentAction" class="com.qrms.action.gamecomment.ViewGameCommentAction"
+		scope="prototype">
+		<property name="gameCommentService" ref="gameCommentService" />
+	</bean>
+	
+	<bean id="makeGameCommentAction" class="com.qrms.action.gamecomment.MakeGameCommentAction"
+		scope="prototype">
+		<property name="gameCommentService" ref="gameCommentService" />
+	</bean>
+	
+	<bean id="loginEmailExists" class="com.qrms.action.user.CheckLoginEmailAction" scope="prototype"> 
+	    <property name="userService" ref="userService" />
+		<property name="nvuserService" ref="nvuserService" />
+	</bean>
+	
+	<bean id="recountInspiringGameQRCodeAction" class="com.qrms.action.inspiringgame.RecountInspiringGameQRCodeAction" scope="prototype">
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+	
+	<bean id="recountPuzzleSolvingGameQRCodeAction" class="com.qrms.action.puzzlesolvinggame.RecountPuzzleSolvingGameQRCodeAction" scope="prototype">
+		<property name="qrContentService" ref="QRContentService" />
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,28 @@
+#map_whole {
+	width: 700px;
+	height: 400px;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+#route_select_div {
+	margin: 15px 0;	
+}
+
+#main_map_canvas {
+	height: 400px;
+	width: 700px;
+	border: 7px solid #fff;
+	-moz-box-shadow: 1px 1px 5px #555;
+	-webkit-box-shadow: 1px 1px 5px #555;
+	margin-bottom: 10px;
+}
+
+#directions_panel {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 250px;
+	height: 400px;
+	overflow: auto;
+}

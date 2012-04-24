@@ -1,0 +1,73 @@
+.section {
+	min-height: 360px;	
+}
+
+img.flushleft {
+	max-width: 350px;
+	float: left;
+	margin: 20px 30px 20px 30px;
+}
+
+img.flushright {
+	max-width: 350px;
+	float: right;
+	margin: 20px 0 20px 10px;
+}
+
+p.section_title {
+	width: 250px;
+	float: left;
+	margin-top: 140px;
+	margin-bottom: 3px;
+	padding-bottom: 0px;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	
+	text-shadow: #ccc 1px 1px 1px;
+}
+
+p.section_content {
+	width: 250px;
+	float: left;
+	margin-top: 0px;
+	padding-top: 0px;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;
+	font-size: 14px;
+}
+
+/*****************************/
+#section_header {
+	height: 550px;
+}
+
+/*****************************/
+#seek_button_a {
+	display: block;
+	float: left;
+	width: 90px;
+	height: 98px;
+	margin: 20px 20px 0 0;
+	background-image: url(../../images/inspiring_mark/seek_button.png);
+	background-repeat: no-repeat;
+}
+
+#seek_button_a:hover {
+	background-position: 0 -5px;
+}
+
+#launch_button_a {
+	display: block;
+	float: left;
+	width: 90px;
+	height: 98px;
+	margin: 20px 0 0 0;	
+	background-image: url(../../images/inspiring_mark/launch_button.png);
+	background-repeat: no-repeat;
+}
+
+#launch_button_a:hover {
+	background-position: 0 -5px;
+}
+
+

@@ -1,0 +1,6 @@
+#statement {
+	width: 650px;
+	height: 450px;
+	overflow-y: scroll;
+	border: 1px #aaa solid;
+}

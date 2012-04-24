@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<constant name="structs.il8n.encoding" value="UTF-8" />
+	<constant name="structs.multipart.saveDir" value="C:\" />
+	
+	<include file="struts-config/mobile-side.xml" ></include>
+	
+	<!-- 登录用户才能访问的action放在这里 -->
+	<package name="user" extends="struts-default">
+		
+		<interceptors>
+			<interceptor name="auth" class="com.qrms.interceptor.UserAuthInterceptor" />
+			<interceptor-stack name="authStack">
+				<interceptor-ref name="auth" />
+				<interceptor-ref name="defaultStack" /><!-- Be Careful! -->
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 默认执行的拦截器 -->
+		<default-interceptor-ref name="authStack" />
+		
+		<!-- 全局result定义 -->
+		<global-results>
+			<result name="notLoggedIn">/normal/login.jsp</result>
+		</global-results>
+		
+		<action name="showUserProfile" class="showUserProfileAction">
+			<result name="success">/user/user-profile.jsp</result>
+			<result name="noUserId">/CommonMessage.jsp?msg=No+Such+User!</result>
+		</action>
+		
+		<action name="launchPuzzleSolvingGame" class="launchPuzzleSolvingGameAction"
+			method="saveInfo">
+			<result name="success">/launch-puzzlesolving-game-success.jsp
+			</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...&amp;type=error
+			</result>
+			<result name="noGameLauncher" type="redirect">/CommonMessage.jsp?msg=No+Such+Game+Luncher!&amp;returnUrl=LaunchPuzzleSolvingGame.jsp&amp;returnText=Launch+Again
+			</result>
+		</action>
+		
+		<!-- OUT OF DATE! -->
+		<action name="createLog" class="createLogAction">
+			<interceptor-ref name="fileUpload">
+				<!-- only picture type allowed -->
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png, image/pjpeg
+				</param>
+				<!-- max size: 3MB -->
+				<param name="maximumSize">3145728</param>
+			</interceptor-ref>
+
+			<interceptor-ref name="authStack" />
+			
+			<result name="success">/createGameLog_Success.jsp</result>
+			<result name="input">/createGameLog.jsp</result>
+			<result name="gameNotExist">/createGameLog.jsp</result>
+			<result name="logCreaterNotExist">/createGameLog.jsp</result>
+		</action>
+
+
+		<action name="editUserProfile" class="editUserProfileAction">
+			<interceptor-ref name="fileUpload">
+				<!-- only picture type allowed -->
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/x-png, image/pjpeg
+				</param>
+				<!-- max size: 3MB -->
+				<param name="maximumSize">3145728</param>
+			</interceptor-ref>
+
+			<interceptor-ref name="authStack" />
+			
+			<result name="success" type="redirect">
+			/CommonMessage.jsp?msg=You+have+successfully+modified+your+profile!&amp;type=success&amp;returnUrl=user/showMyProfileMainPage.action&amp;returnText=return
+			</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="launchInspiringGame" class="launchInspiringGameAction" method="launchGame">
+			<result name="success" type="redirect">/inspiring_mode/launch-inspiring-game-success.jsp?code=${theQRContent.code}</result>
+			<result name="noGameLauncher">/CommonMessage.jsp?msg=No+Such+User!</result>
+			<result name="input">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="showInspiringGameDetail" class="showInspiringGameDetailAction">
+			<result name="success">/inspiring_mode/show-inspiring-game-detail.jsp</result>
+			<result name="input">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="showPuzzleSolvingGameDetail" class="showPuzzleSolvingGameDetailAction">
+			<result name="showDetail">/ShowPuzzleSolvingGameDetail.jsp</result>
+			<result name="input">/CommonMessage.jsp?msg=No+Game+Id!&amp;returnUrl=Seek.jsp&amp;returnText=Seek+More</result>
+		</action>
+		
+		<action name="userLogout" class="userLogoutAction">
+			<result name="success" type="redirect">/normal/login.jsp</result>
+		</action>
+		
+		<action name="viewStaredGames" class="viewStaredGameAction">
+			<result name="success">/user/view-stared-games.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="sendInternalMessage" class="sendInternalMessageAction">
+			<result name="success" type="redirect">/CommonMessage.jsp?msg=Message+has+been+sent+successfully!&amp;type=success</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="viewAllInternalMessages" class="viewInternalMessageAction" method="viewAllInternalMessages">
+			<result name="success">/user/view-my-internal-messages.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="viewSingleInternalMessage" class="viewInternalMessageAction" method="viewSingleInternalMessage">
+			<result name="success">/user/view-single-internal-message.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="showModifyInspiringGamePage" class="modifyInspiringGameAction" method="showForm">
+			<result name="success">/inspiring_mode/modify-inspiring-game.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="modifyInspiringGame" class="modifyInspiringGameAction" method="modify">
+			<result name="success" type="redirect">
+			/CommonMessage.jsp?msg=You+have+successfully+modified+the+game!&amp;type=success&amp;returnUrl=inspiring_mode/showInspiringGameDetail.action?gameId=${newGameInfo.id}&amp;returnText=View+this+game
+			</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...&amp;type=error</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=You+have+no+right+to+modify+this+game.&amp;type=error</result>
+		</action>
+		
+		<action name="showModifyPuzzleSolvingGamePage" class="modifyPuzzleSolvingGameAction" method="showForm">
+			<result name="success">/modify-puzzlesolving-game.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="modifyPuzzleSolvingGame" class="modifyPuzzleSolvingGameAction" method="modify">
+			<result name="success" type="redirect">
+			/CommonMessage.jsp?msg=You+have+successfully+modified+the+game!&amp;type=success&amp;returnUrl=showPuzzleSolvingGameDetail.action?gameId=${newGameInfo.id}&amp;returnText=View+this+game
+			</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...&amp;type=error</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=You+have+no+right+to+modify+this+game.&amp;type=error</result>
+		</action>
+		
+		<action name="showMyProfileMainPage" class="showMyProfileMainPageAction">
+			<result name="success">/user/my-profile.jsp</result>
+		</action>
+		
+		<action name="viewGameComment" class="viewGameCommentAction">
+			<result name="success">/game_comment/view-game-comment.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="recountInspiringGameQRCode" class="recountInspiringGameQRCodeAction">
+			<result name="success">/inspiring_mode/recount-qr-code.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="recountPuzzleSolvingGameQRCode" class="recountPuzzleSolvingGameQRCodeAction">
+			<result name="success">/recount-qr-codes-for-puzzle-solving.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		
+	</package>
+	
+	
+	
+	<!-- 管理员可以访问的action放在这里 -->
+	<package name="admin" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="auth" class="com.qrms.interceptor.AdminAuthInterceptor" />
+			<interceptor-stack name="authStack">
+				<interceptor-ref name="auth" />
+				<interceptor-ref name="defaultStack" /><!-- Be Careful! -->
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 默认执行的拦截器 -->
+		<default-interceptor-ref name="authStack" />
+		
+		<!-- 全局result定义 -->
+		<global-results>
+			<result name="notLoggedIn">/admin/login.jsp</result>
+		</global-results>
+	
+		<action name="publishNews" class="publishNewsAction">
+			<result name="success" type="redirect">/admin/common-message.jsp?msg=News+Successfully+Published!&amp;type=success</result>
+			<result name="input" type="redirect">/admin/common-message.jsp?msg=input...&amp;type=error</result>
+		</action>
+		
+		<action name="publishEvent" class="publishEventAction">
+			<result name="success" type="redirect">/admin/common-message.jsp?msg=Event+Successfully+Published!&amp;type=success</result>
+			<result name="input" type="redirect">/admin/common-message.jsp?msg=input...&amp;type=error</result>
+		</action>
+		
+		<action name="adminLogout" class="adminLoginAndLogoutAction" method="logout">
+			<result name="success" type="redirect">/admin/login.jsp</result>
+		</action>
+		
+		
+		
+	</package>
+	
+	
+	
+	
+	
+	<!-- 游客可以访问的action放在这里 -->
+	<package name="visitor" extends="struts-default">
+	
+		<action name="userRegister" class="userRegisterAction">
+			<result type="redirect">/sendMail.action</result>
+			<result name="error">/CommonMessage.jsp?msg=Register+error&amp;returnUrl=registration.jsp&amp;returnText=Register+Again
+			</result>
+		</action>
+
+		<action name="userLogin" class="userLoginAction">
+			<result name="success" type="redirect">/normal/login_redirect.jsp?previousPageURL=${previousPageURL}&amp;previousPageFullURL=${previousPageFullURL}
+			</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Email+or+password+error&amp;returnUrl=normal/login.jsp&amp;returnText=Login+Again&amp;type=error
+			</result>
+		</action>
+
+		<action name="sendMail" class="sendMailAction">
+			<result name="success" type="redirect">
+			/CommonMessage.jsp?msg=Email+has+been+sent+successfully!+Please+check+your+email+and+activate+your+account.+If+you+cannot+find+your+email,+you+can+try+to+find+it+in+spam.&amp;returnUrl=normal/login.jsp&amp;returnText=I'm+ready.+Sign+in+Now!&amp;type=success
+			</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Email+sending+failure.+Please+try+again+later.
+			</result>
+		</action>
+
+		<action name="uservalidate" class="userValidateAction">
+			<result name="success" type="redirect">/CommonMessage.jsp?msg=Activating+Success!&amp;returnUrl=normal/login.jsp&amp;returnText=Login+Now
+			</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Activating+Fails.+Please+try+again.&amp;returnUrl=index.jsp&amp;returnText=Return+Home
+			</result>
+		</action>
+
+		<action name="byCity" class="seekGameAction" method="findByCity">
+			<result name="success">/SeekGameResult.jsp</result>
+			<result name="error">/SeekGameError.jsp</result>
+		</action>
+
+		<action name="byProv" class="seekGameAction" method="findByProv">
+			<result name="success">/SeekGameResult.jsp</result>
+			<result name="error">/SeekGameError.jsp</result>
+		</action>
+
+		<action name="byCou" class="seekGameAction" method="findByCou">
+			<result name="success">/SeekGameResult.jsp</result>
+			<result name="error">/SeekGameError.jsp</result>
+		</action>
+
+		<action name="byLatLong" class="seekGameAction" method="findByLatLong">
+			<result name="success">/SeekGameResult.jsp</result>
+			<result name="error">/SeekGameError.jsp</result>
+		</action>
+
+		<action name="byOriginLatLong" class="seekGameAction" method="findByOriginLatLong">
+			<result name="success">/SeekGameResult.jsp</result>
+			<result name="error">/SeekGameError.jsp</result>
+		</action>
+
+		<action name="viewLog" class="viewLogAction">
+			<result name="success">/DisplayLog.jsp</result>
+			<result name="error">/ViewLogError.jsp</result>
+		</action>
+
+		<!-- user can see the result without logging in -->
+		<action name="showQRContent" class="showQRContentAction">
+			<result name="success">/inspiring_mode/inspiring-display.jsp</result>
+			<result name="input">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="seekInspiringGameByCity" class="seekInspiringGameAction" method="findByCity">
+			<result name="success">/inspiring_mode/seek-inspiring-game-result.jsp</result>
+			<result name="error">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="seekInspiringGameByProvince" class="seekInspiringGameAction" method="findByProv">
+			<result name="success">/inspiring_mode/seek-inspiring-game-result.jsp</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="seekInspiringGameByNation" class="seekInspiringGameAction" method="findByCou">
+			<result name="success">/inspiring_mode/seek-inspiring-game-result.jsp</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="seekInspiringGameByLatLong" class="seekInspiringGameAction" method="findByLatLong">
+			<result name="success">/inspiring_mode/seek-inspiring-game-result.jsp</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="seekInspiringGameByOriginLatLong" class="seekInspiringGameAction" method="findByOriginLatLong">
+			<result name="success">/inspiring_mode/seek-inspiring-game-result.jsp</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="viewLaunchedGames" class="viewLaunchedGamesAction">
+			<result name="success">/user/view-launched-games.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=input...&amp;type=error</result>
+		</action>
+		
+		<action name="adminLogin" class="adminLoginAndLogoutAction" method="login">
+			<result name="success" type="redirect">/admin/index.jsp</result>
+			<result name="error" type="redirect">/admin/common-message.jsp?msg=Username+or+password+error&amp;type=error</result>
+		</action>
+		
+		<action name="adminLogin" class="adminLoginAndLogoutAction" method="login">
+			<result name="success" type="redirect">/admin/index.jsp</result>
+			<result name="error" type="redirect">/admin/common-message.jsp?msg=Username+or+password+error&amp;type=error</result>
+		</action>
+		
+		<action name="viewSingleNews" class="retrieveNewsAction" method="retrieveSingleNews">
+			<result name="success">/news/view-single-news.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="viewSingleEvent" class="retrieveEventAction" method="retrieveSingleEvent">
+			<result name="success">/event/view-single-event.jsp</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+		</action>
+		
+		<action name="makeGameCommentForPuzzleSolving" class="makeGameCommentAction">
+			<result name="success" type="redirect">/showPuzzleSolvingGameDetail.action?gameId=${gameComment.gameId}</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+		<action name="makeGameCommentForInspiringMark" class="makeGameCommentAction">
+			<result name="success" type="redirect">/inspiring_mode/showInspiringGameDetail.action?gameId=${gameComment.gameId}</result>
+			<result name="input" type="redirect">/CommonMessage.jsp?msg=Input...</result>
+			<result name="error" type="redirect">/CommonMessage.jsp?msg=Error...</result>
+		</action>
+		
+	</package>
+	
+	
+	
+	<package name="json" extends="json-default">
+		<action name="retrieveLatestNews" class="retrieveNewsAction" method="retrieveLatestNews">
+			<result type="json"></result>
+		</action>
+		
+		<action name="retrieveLatestEvents" class="retrieveEventAction" method="retrieveLatestEvents">
+			<result type="json"></result>
+		</action>
+		
+		<action name="starGame" class="starGameAction">
+			<result type="json"></result>
+		</action>
+		<action name="loginEmailExists" class="loginEmailExists" method="Exists">
+		    <result type="json"></result>
+		</action>
+	</package>
+
+</struts>

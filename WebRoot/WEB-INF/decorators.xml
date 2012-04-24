@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<decorators defaultdir="/WEB-INF/index/decorators">
+	<excludes>
+		<pattern>/GoogleMap.jsp</pattern>
+		<pattern>/ShowMyPosition.jsp</pattern>
+		<pattern>/index.jsp*</pattern>
+		<pattern>/inspiring_mode/inspiring-display.jsp*</pattern>
+		<pattern>/showQRContent.action*</pattern>
+		<pattern>/test/no_decorator/*</pattern>
+		<pattern>/js/tiny_mce/*</pattern>
+		<pattern>/qr-content-preview.jsp*</pattern>
+		<pattern>/admin/*</pattern>
+    </excludes>
+    
+    
+    <decorator name="inspiring-mark" page="decorator_inspiring_mark.jsp">
+    	<pattern>/inspiring_mode/*</pattern>
+    </decorator>
+    
+    <decorator name="conquest-and-defence" page="decorator_conquest_and_defence.jsp">
+    	<pattern>/conquest_and_defence/*</pattern>
+    </decorator>
+    
+    
+    <decorator name="puzzle-solving" page="decorator_puzzle_solving.jsp">
+    	<pattern>/*</pattern>
+    </decorator>
+    
+    
+    <decorator name="normal" page="decorator_normal.jsp">
+    	<pattern>/normal/*</pattern>
+    	<pattern>/user/*</pattern>
+    	<pattern>/news/*</pattern>
+    	<pattern>/event/*</pattern>
+    	<pattern>/game_comment/*</pattern>
+    	<pattern>/CommonMessage.jsp*</pattern>
+    </decorator>
+    
+    
+</decorators>

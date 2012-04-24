@@ -1,0 +1,130 @@
+#title_gameName {
+	font-size:200%;
+	font-family:"Courier New", Courier, monospace;
+	font-weight:bolder;
+	margin-bottom:10px;
+	color:#000000;
+	border-bottom:1px dashed #AAAAAA;
+}
+
+#facebook_share_button {
+	margin-left:800px;
+	right:100px;
+	font-size:16px;
+}
+
+#gameBriefHeading {
+	margin-bottom:30px;	
+}
+
+#gameLauncher {
+	float:left;
+	width:60%;
+}
+
+#gameDetailHeading {
+	background-color:#edf1f8;
+	padding:14px 14px 14px 14px;
+	margin-bottom:30px;
+	border:1px solid #AAAAAA;
+}
+
+#gameDetailHeading p {
+	font-weight:700;
+	line-height:170%;
+}
+
+
+#difficulty {
+	float:left;
+	width:60%;
+}
+
+#longitude {
+	float:left;
+	width:60%;	
+}
+
+#coordinate {
+	padding-top:10px;
+}
+
+#location {
+	margin-top:10px;
+	font-size:90%;
+}
+
+#location a:link, #location a:visited {
+	margin-right:15px;
+	font-weight:100;
+	text-decoration:none;
+	color:#333399;
+}
+
+#location a:hover, #location a:active {
+	font-weight:100;
+	text-decoration:underline;
+	color:#FF6600;
+}
+
+.gameDetail_item {
+	font-weight:700;
+	padding-bottom:10px;	
+}
+
+.gameDetail_title {
+	display:block;
+	font-size:120%;
+	color:#003399;
+}
+
+
+
+.comment {
+	background-color:#edf1f8;
+	margin:20px 20px 20px 20px;
+	border:1px solid #AAAAAA;
+	padding:5px;
+}
+
+.comment_head {
+	background-color:#d5ddec;
+	padding:0 0 0 10px;
+}
+
+.comment_head img {
+	margin-top:5px;
+	margin-right:20px;
+}
+
+.comment_userName {
+	font-size:150%;
+	margin-right:13px;
+	color:#0066CC;
+}
+
+.comment_time {
+	font-size:90%;
+	color:#666666;
+	margin-left:13px;
+}
+
+.comment_content {
+	letter-spacing:1px;
+	font-weight:bold;
+	padding-left:10px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.comment_viewlog a:link, .comment_viewlog a:visited {
+	font-size:80%;
+	text-decoration:none;
+	color:#000099;
+}
+
+.comment_viewlog a:hover, .comment_viewlog a:active {
+	font-size:80%;
+	text-decoration:underline;
+	color:#0000FF;
+}

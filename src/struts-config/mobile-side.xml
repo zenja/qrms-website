@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="mobile" extends="struts-default">
+		<result-types>
+			<result-type name="string" class="com.qrms.action.mobile.StringResult"></result-type>
+			<result-type name="mapArray" class="com.qrms.action.mobile.MapArrayResult"></result-type>
+		</result-types>
+
+		<action name="mobileLogin" class="mobileLoginAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getCityBroadcastList" class="getCityBroadcastListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getCityBattleEventList" class="getCityBattleEventListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getMyTerritoryList" class="getMyTerritoryListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getMyNewsList" class="getMyNewsListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getMyMsgList" class="getMyMsgListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="searchTerritoryList" class="searchTerritoryListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="occupyAction" class="occupyAction">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		<action name="defendAction" class="defendAction">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		<action name="reinforceAction" class="reinforceAciton">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		<action name="rankAction" class="rankAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getTerritoryInfoAction" class="getTerritoryInfoAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="getCityTerritoryListAction" class="getCityTerritoryListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="occupyAction" class="occupyAction">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		
+		<action name="sendBroadcast" class="sendBroadcastAction">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		<action name="getMsgBoxList" class="getMsgBoxListAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+		<action name="reportError" class="reportErrorAction">
+			<result name="strResult" type="string">
+				<param name="stringName">strResult</param>
+			</result>
+		</action>
+		<action name="getAchievement" class="getAchievementAction">
+			<result name="mapArrayResult" type="mapArray">
+				<param name="mapArrayName">mapArrayResult</param>
+			</result>
+		</action>
+	</package>
+	
+	
+
+</struts>

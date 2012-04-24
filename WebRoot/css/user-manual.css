@@ -1,0 +1,19 @@
+h1 {
+	display: block;
+	margin: 50px 0 0 5px;
+	font: bord normal normal 22px Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	color: #0070BB;
+}
+
+p.my_h2 {
+	display: block;
+	margin-top: 20px 0 0 5px;
+	font: normal normal normal 18px Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	color: #222;
+}
+
+.user_manual_contents {
+	display: block;
+	border-bottom: 1px dotted #ccc;
+	margin: 10px 0 5px 0;
+}

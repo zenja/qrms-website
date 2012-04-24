@@ -1,0 +1,17 @@
+#news_or_event_title {
+	text-align: center;
+	color: #3c3c3c;
+	font-family: Verdana, 'Lucida Grande', Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	font-weight: bolder;
+}
+
+#news_or_event_date {
+	text-align: center;
+	color: #3b377f;
+	font-size: 12px;
+}
+
+#news_or_event_content {
+	
+}
